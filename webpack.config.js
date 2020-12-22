@@ -20,12 +20,6 @@ const config = {
             },
         ]
     },
-    optimization: {
-        minimize: true,
-        providedExports: false,
-        concatenateModules: false,
-        usedExports: true
-    },
     plugins: [
         new CleanWebpackPlugin(),
         new FileManagerPlugin({
