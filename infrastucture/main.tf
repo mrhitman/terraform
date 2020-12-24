@@ -15,15 +15,15 @@ resource "aws_lambda_event_source_mapping" "event_source_mapping" {
   batch_size       = 1
   event_source_arn = aws_sqs_queue.terraform_queue.arn
   enabled          = true
-  function_name    = aws_lambda_function.test_lambda.arn
+  function_name    = aws_lambda_function.lambda_consumer.arn
 }
 
-resource "aws_lambda_function" "test_lambda" {
-  filename         = "../dist/lambdas/lambda1.zip"
-  function_name    = "lambda_function_name"
+resource "aws_lambda_function" "lambda_consumer" {
+  filename         = "../dist/lambdas/lambda-consumer.zip"
+  function_name    = "lambda-consumer"
   role             = aws_iam_role.example_lambda.arn
   handler          = "index.handler"
-  source_code_hash = filebase64sha256("../dist/lambdas/lambda1.zip")
+  source_code_hash = filebase64sha256("../dist/lambdas/lambda-consumer.zip")
   runtime          = "nodejs12.x"
   timeout          = 30
   memory_size      = 128
