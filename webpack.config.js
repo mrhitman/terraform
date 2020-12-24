@@ -1,14 +1,17 @@
-const { resolve } = require('path');
+const { resolve, join, basename } = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
+const { readdirSync, lstatSync } = require('fs');
 
+const isDirectory = source => lstatSync(source).isDirectory()
+const getDirectories = source =>
+    readdirSync(source).map(name => join(source, name)).filter(isDirectory)
+
+const directories = getDirectories(resolve(__dirname, 'src', 'lambdas'))
 const config = {
     mode: 'production',
     target: 'node',
-    entry: {
-        lambda1: resolve(__dirname, 'src', 'lambdas', 'lambda1'),
-        lambda2: resolve(__dirname, 'src', 'lambdas', 'lambda2'),
-    },
+    entry: directories.reduce((acc, lambdaPath) => ({ ...acc, [basename(lambdaPath)]: lambdaPath }), {}),
     module: {
         rules: [
             {
@@ -17,21 +20,16 @@ const config = {
             },
         ]
     },
-    optimization: {
-        minimize: true,
-        providedExports: false,
-        concatenateModules: false,
-        usedExports: true
-    },
     plugins: [
         new CleanWebpackPlugin(),
         new FileManagerPlugin({
             events: {
                 onEnd: {
-                    archive: [
-                        { source: 'dist/lambdas/lambda1', destination: 'dist/lambdas/lambda1.zip' },
-                        { source: 'dist/lambdas/lambda2', destination: 'dist/lambdas/lambda2.zip' },
-                    ]
+                    archive:
+                        getDirectories(
+                            resolve(__dirname, 'dist', 'lambdas')).map(lambdaDistPath => ({
+                                source: lambdaDistPath, destination: resolve(lambdaDistPath, '..', basename(lambdaDistPath) + '.zip')
+                            }))
                 }
             }
         })
