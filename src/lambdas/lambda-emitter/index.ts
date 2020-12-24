@@ -1,14 +1,20 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
 import { SqsService } from './sqs';
 
+const config = {
+  region: process.env.region!,
+  queueUrl: process.env.sqs!
+}
+
 export const handler: APIGatewayProxyHandler = async (event, _context) => {
   const sqs = new SqsService({
-    region: process.env.region!,
-    queueUrl: 'https://sqs.eu-central-1.amazonaws.com/616174815271/terraform-example-queue', //process.env.sqs!,
+    region: config.region,
+    queueUrl: config.queueUrl
   });
 
   await sqs.send(event);
   console.log('THISK IS LAMBDA 2', event);
+
   return {
     statusCode: 200,
     body: JSON.stringify(

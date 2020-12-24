@@ -27,9 +27,12 @@ const config = {
                 onEnd: {
                     archive:
                         getDirectories(
-                            resolve(__dirname, 'dist', 'lambdas')).map(lambdaDistPath => ({
-                                source: lambdaDistPath, destination: resolve(lambdaDistPath, '..', basename(lambdaDistPath) + '.zip')
-                            }))
+                            resolve(__dirname, 'dist', 'lambdas')).map(lambdaDistPath => {
+                                return {
+                                    source: lambdaDistPath,
+                                    destination: resolve(lambdaDistPath, '..', basename(lambdaDistPath) + '.zip')
+                                };
+                            })
                 }
             }
         })
