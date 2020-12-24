@@ -1,5 +1,6 @@
 dependencies:
   aws-lambda: 1.0.6
+  aws-sdk: 2.817.0
   clean-webpack-plugin: 3.0.0_webpack@5.11.0
   cross-env: 7.0.3
   filemanager-webpack-plugin: 3.0.0-beta.0_webpack@5.11.0
@@ -478,6 +479,22 @@ packages:
       node: '>= 0.8.0'
     resolution:
       integrity: sha512-BXL3Og97rOY9jE7OeYQdKftMAZ3SneFg/rBslyog+W0dTDKq3NBuM3fBWhc3POf26kHcFjsnLIWScM8bWhD4AA==
+  /aws-sdk/2.817.0:
+    dependencies:
+      buffer: 4.9.2
+      events: 1.1.1
+      ieee754: 1.1.13
+      jmespath: 0.15.0
+      querystring: 0.2.0
+      sax: 1.2.1
+      url: 0.10.3
+      uuid: 3.3.2
+      xml2js: 0.4.19
+    dev: false
+    engines:
+      node: '>= 0.8.0'
+    resolution:
+      integrity: sha512-DZIdWpkcqbqsCz0MEskHsyFaqc6Tk9XIFqXAg1AKHbOgC8nU45bz+Y2osX77pU01JkS/G7OhGtGmlKDrOPvFwg==
   /balanced-match/1.0.0:
     dev: false
     resolution:
@@ -568,7 +585,7 @@ packages:
   /buffer/4.9.2:
     dependencies:
       base64-js: 1.5.1
-      ieee754: 1.2.1
+      ieee754: 1.1.13
       isarray: 1.0.0
     dev: false
     resolution:
@@ -2943,6 +2960,7 @@ specifiers:
   '@types/node': ^14.14.14
   '@types/webpack': ^4.41.25
   aws-lambda: ^1.0.6
+  aws-sdk: ^2.817.0
   clean-webpack-plugin: ^3.0.0
   cross-env: ^7.0.3
   filemanager-webpack-plugin: ^3.0.0-beta.0

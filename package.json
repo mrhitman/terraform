@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack",
     "predeploy": "npm run build",
+    "init": "cd infrastucture && terraform init",
     "deploy": "cd infrastucture && terraform apply",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "aws-lambda": "^1.0.6",
+    "aws-sdk": "^2.817.0",
     "clean-webpack-plugin": "^3.0.0",
     "cross-env": "^7.0.3",
     "filemanager-webpack-plugin": "^3.0.0-beta.0",
