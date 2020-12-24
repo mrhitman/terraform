@@ -8,6 +8,7 @@ export const handler: APIGatewayProxyHandler = async (event, _context) => {
   });
 
   await sqs.send(event);
+  console.log('THISK IS LAMBDA 2', event);
   return {
     statusCode: 200,
     body: JSON.stringify(

@@ -66,6 +66,8 @@ resource "aws_iam_role" "example_lambda" {
   assume_role_policy = file("policy.json")
 }
 
+
+
 resource "aws_iam_policy" "example_lambda" {
   policy = data.aws_iam_policy_document.example_lambda.json
 }
@@ -77,43 +79,50 @@ resource "aws_iam_role_policy_attachment" "example_lambda" {
 
 data "aws_iam_policy_document" "example_lambda" {
   statement {
-    sid       = "AllowSQSPermissions"
-    effect    = "Allow"
-    resources = ["arn:aws:sqs:*"]
-
-    actions = [
-      "sqs:ChangeMessageVisibility",
-      "sqs:DeleteMessage",
-      "sqs:GetQueueAttributes",
-      "sqs:ReceiveMessage",
-    ]
-  }
-
-  statement {
-    sid       = "AllowInvokingLambdas"
-    effect    = "Allow"
-    resources = ["arn:aws:lambda:${var.region}:*:function:*"]
-    actions   = ["lambda:InvokeFunction"]
-  }
-
-  statement {
-    sid       = "AllowCreatingLogGroups"
-    effect    = "Allow"
-    resources = ["arn:aws:logs:${var.region}:*:*"]
-    actions   = ["logs:CreateLogGroup"]
-  }
-
-  statement {
-    sid       = "AllowWritingLogs"
-    effect    = "Allow"
-    resources = ["arn:aws:logs:${var.region}:*:log-group:/aws/lambda/*:*"]
-
-    actions = [
-      "logs:CreateLogStream",
-      "logs:PutLogEvents",
-    ]
+    actions   = ["*"]
+    resources = ["*"]
   }
 }
+
+# data "aws_iam_policy_document" "example_lambda" {
+#   statement {
+#     sid       = "AllowSQSPermissions"
+#     effect    = "Allow"
+#     resources = ["arn:aws:sqs:*"]
+
+#     actions = [
+#       "sqs:ChangeMessageVisibility",
+#       "sqs:DeleteMessage",
+#       "sqs:GetQueueAttributes",
+#       "sqs:ReceiveMessage",
+#     ]
+#   }
+
+#   statement {
+#     sid       = "AllowInvokingLambdas"
+#     effect    = "Allow"
+#     resources = ["arn:aws:lambda:${var.region}:*:function:*"]
+#     actions   = ["lambda:InvokeFunction"]
+#   }
+
+#   statement {
+#     sid       = "AllowCreatingLogGroups"
+#     effect    = "Allow"
+#     resources = ["arn:aws:logs:${var.region}:*:*"]
+#     actions   = ["logs:CreateLogGroup"]
+#   }
+
+#   statement {
+#     sid       = "AllowWritingLogs"
+#     effect    = "Allow"
+#     resources = ["arn:aws:logs:${var.region}:*:log-group:/aws/lambda/*:*"]
+
+#     actions = [
+#       "logs:CreateLogStream",
+#       "logs:PutLogEvents",
+#     ]
+#   }
+# }
 
 resource "aws_sns_topic" "results_updates" {
     name = "results-updates-topic"
