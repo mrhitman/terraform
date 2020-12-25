@@ -21,7 +21,7 @@ resource "aws_lambda_event_source_mapping" "event_source_mapping" {
 resource "aws_lambda_function" "lambda_consumer" {
   filename         = "../dist/lambdas/lambda-consumer.zip"
   function_name    = "lambda-consumer"
-  role             = aws_iam_role.example_lambda.arn
+  role             = aws_iam_role.lambda_role.arn
   handler          = "index.handler"
   source_code_hash = filebase64sha256("../dist/lambdas/lambda-consumer.zip")
   runtime          = "nodejs12.x"
@@ -38,7 +38,7 @@ resource "aws_lambda_function" "lambda_consumer" {
 resource "aws_lambda_function" "lambda_emitter" {
   filename         = "../dist/lambdas/lambda-emitter.zip"
   function_name    = "lambda-emitter"
-  role             = aws_iam_role.example_lambda.arn
+  role             = aws_iam_role.lambda_role.arn
   handler          = "index.handler"
   source_code_hash = filebase64sha256("../dist/lambdas/lambda-emitter.zip")
   runtime          = "nodejs12.x"
@@ -51,20 +51,20 @@ resource "aws_lambda_function" "lambda_emitter" {
 }
 
 # Policies
-resource "aws_iam_role" "example_lambda" {
+resource "aws_iam_role" "lambda_role" {
   assume_role_policy = file("policy.json")
 }
 
-resource "aws_iam_policy" "example_lambda" {
-  policy = data.aws_iam_policy_document.example_lambda.json
+resource "aws_iam_policy" "lambda_policy" {
+  policy = data.aws_iam_policy_document.policy_document.json
 }
 
-resource "aws_iam_role_policy_attachment" "example_lambda" {
-  policy_arn = aws_iam_policy.example_lambda.arn
-  role       = aws_iam_role.example_lambda.name
+resource "aws_iam_role_policy_attachment" "policy_attachment" {
+  policy_arn = aws_iam_policy.lambda_policy.arn
+  role       = aws_iam_role.lambda_role.name
 }
 
-data "aws_iam_policy_document" "example_lambda" {
+data "aws_iam_policy_document" "policy_document" {
   statement {
     sid       = "AllowSQSPermissions"
     effect    = "Allow"
