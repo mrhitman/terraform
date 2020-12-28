@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`lambda emitter happy path success 1`] = `
+Object {
+  "body": "{
+  \\"message\\": \\"lambda 1 as assadsdasda\\",
+  \\"input\\": {}
+}",
+  "statusCode": 200,
+}
+`;
+
+exports[`lambda emitter happy path success2 1`] = `
+Object {
+  "body": "{
+  \\"message\\": \\"lambda 1 as assadsdasda\\",
+  \\"input\\": {}
+}",
+  "statusCode": 200,
+}
+`;
