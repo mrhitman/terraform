@@ -6,6 +6,14 @@ provider "aws" {
   region = var.region
 }
 
+terraform {
+  backend "s3" {
+    bucket = "tf-bucket-lambdas"
+    key    = "terraform_state/ec2.tfstate"
+    region = "eu-central-1"
+  }
+}
+
 resource "aws_sqs_queue" "terraform_queue" {
   name          = "terraform-example-queue"
   delay_seconds = 90
