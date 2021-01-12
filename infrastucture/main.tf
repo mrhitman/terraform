@@ -16,7 +16,7 @@ terraform {
 
 resource "aws_sqs_queue" "terraform_queue" {
   name          = "terraform-example-queue"
-  delay_seconds = 90
+  delay_seconds = 0
 }
 
 resource "aws_lambda_event_source_mapping" "event_source_mapping" {
