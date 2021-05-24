@@ -1,4 +1,5 @@
-import { SQS } from 'aws-sdk';
+import { SQS } from "aws-sdk";
+import stringify from "fast-json-stable-stringify";
 
 export class SqsService {
   private sqs: SQS;
@@ -12,7 +13,7 @@ export class SqsService {
   async send(message: any, queueUrl?: string) {
     return this.sqs
       .sendMessage({
-        MessageBody: JSON.stringify(message),
+        MessageBody: stringify(message),
         QueueUrl: queueUrl || this.queueUrl,
       })
       .promise();

@@ -1,6 +1,5 @@
 const { resolve, join, basename } = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const FileManagerPlugin = require('filemanager-webpack-plugin');
 const { readdirSync, lstatSync, mkdirSync, existsSync } = require('fs');
 
 const isDirectory = source => lstatSync(source).isDirectory()
@@ -30,20 +29,6 @@ const config = {
     },
     plugins: [
         new CleanWebpackPlugin(),
-        new FileManagerPlugin({
-            events: {
-                onEnd: {
-                    archive:
-                        getDirectories(
-                            resolve(path)).map(lambdaDistPath => {
-                                return {
-                                    source: lambdaDistPath,
-                                    destination: resolve(lambdaDistPath, '..', basename(lambdaDistPath) + '.zip')
-                                };
-                            })
-                }
-            }
-        })
     ],
     resolve: {
         extensions: ['.ts', '.js']

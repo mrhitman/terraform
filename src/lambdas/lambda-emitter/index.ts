@@ -6,7 +6,7 @@ const config = {
   queueUrl: process.env.sqs!,
 };
 
-export const handler: APIGatewayProxyHandler = async (event) => {
+export const handler: APIGatewayProxyHandler = async (event, _context) => {
   const sqs = new SqsService({
     region: config.region,
     queueUrl: config.queueUrl,
