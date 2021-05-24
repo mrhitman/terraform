@@ -3,24 +3,33 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "build": "webpack",
     "predeploy": "npm run build",
     "init:s3": "aws s3api create-bucket --bucket tf-bucket-lambdas --region eu-central-1 --create-bucket-configuration LocationConstraint=eu-central-1",
     "init": "cd infrastucture && terraform init",
     "deploy": "cd infrastucture && terraform apply",
-    "test": "jest"
+    "test": "jest",
+    "nx": "nx"
+  },
+  "workspaces": {
+    "packages": [
+      "src/common",
+      "src/lambdas/*",
+      "src/layers/*"
+    ]
   },
   "author": "One",
   "license": "ISC",
   "dependencies": {
     "aws-lambda": "^1.0.6",
-    "aws-sdk": "^2.817.0",
     "clean-webpack-plugin": "^3.0.0",
     "cross-env": "^7.0.3",
     "filemanager-webpack-plugin": "^3.0.0-beta.0",
     "jest": "^26.6.3",
     "lodash": "^4.17.20",
+    "nx": "^12.3.4",
     "ts-loader": "^8.0.12",
     "ts-node": "^9.1.1",
     "tsconfig-paths": "^3.9.0",
@@ -32,8 +41,9 @@
     "@types/aws-lambda": "^8.10.67",
     "@types/jest": "^26.0.19",
     "@types/lodash": "^4.14.165",
-    "@types/node": "^14.14.14",
+    "@types/node": "^14.17.0",
     "@types/webpack": "^4.41.25",
+    "aws-sdk": "^2.912.0",
     "ts-jest": "^26.4.4"
   }
 }
