@@ -27,6 +27,20 @@ data "aws_iam_policy_document" "policy_document" {
   }
 
   statement {
+    sid       = "AllowDYNAMOPermissions"
+    effect    = "Allow"
+    resources = [aws_dynamodb_table.device_connections.arn, "${module.api_gatewayv2.api_arn}/*"]
+
+    actions = [
+      "dynamodb:GetItem",
+      "dynamodb:PutItem",
+      "dynamodb:DeleteItem",
+      "dynamodb:Scan",
+      "execute-api:ManageConnections"
+    ]
+  }
+
+  statement {
     sid       = "AllowInvokingLambdas"
     effect    = "Allow"
     resources = ["arn:aws:lambda:${var.region}:*:function:*"]

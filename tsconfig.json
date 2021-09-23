@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es2021",
     "module": "commonjs",
     "outDir": "dist",
     "types": ["node", "jest"],
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "noEmitHelpers": true,
     "forceConsistentCasingInFileNames": true
-  },
+  }
 }
