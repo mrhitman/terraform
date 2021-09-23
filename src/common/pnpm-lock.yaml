@@ -1,0 +1,13 @@
+lockfileVersion: 5.3
+
+specifiers:
+  fast-json-stable-stringify: ^2.1.0
+
+dependencies:
+  fast-json-stable-stringify: 2.1.0
+
+packages:
+
+  /fast-json-stable-stringify/2.1.0:
+    resolution: {integrity: sha512-lhd/wF+Lk98HZoTCtlVraHtfh5XYijIjalXck7saUtuanSDyLMxnHhSXEDJqHxD7msR8D0uCmqlkwjCV8xvwHw==}
+    dev: false

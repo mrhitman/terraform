@@ -1,0 +1,4 @@
+packages:
+  - 'src/common'
+  - 'src/lambdas/*'
+  - 'src/layers/*'
