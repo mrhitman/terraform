@@ -11,6 +11,7 @@
     "init:s3": "aws s3api create-bucket --bucket tf-bucket-lambdas --region eu-central-1 --create-bucket-configuration LocationConstraint=eu-central-1",
     "init": "cd infrastucture && terraform init",
     "deploy": "cd infrastucture && terraform apply",
+    "destroy": "cd infrastucture && terraform destroy",
     "test": "jest"
   },
   "workspaces": {
