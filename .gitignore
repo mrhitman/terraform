@@ -2,3 +2,5 @@ dist/
 .idea/
 node_modules/
 infrastucture/.terraform
+*.log
+*.lock.info

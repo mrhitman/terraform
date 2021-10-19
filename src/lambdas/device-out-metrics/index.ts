@@ -1,16 +1,17 @@
-import { APIGatewayProxyHandler } from 'aws-lambda';
+import {APIGatewayProxyHandler} from "aws-lambda";
 
 export const handler: APIGatewayProxyHandler = async (event, _context) => {
-  console.log('THISK IS LAMBDA 1', event);
+  console.log("THIS IS TRIGGERED LAMBDA FROM DEVICE OUT METRICS", event);
+
   return {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: 'lambda 1 assadasdas ',
+        message: "device out metrics",
         input: event,
       },
       null,
-      2,
+      2
     ),
   };
 };
